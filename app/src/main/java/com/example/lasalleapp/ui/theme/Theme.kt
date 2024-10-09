@@ -45,7 +45,7 @@ fun LaSalleAppTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = poppinsTypo,
         content = content
     )
 }
