@@ -4,6 +4,9 @@
     <string name="news">Noticias </string>
 
     <string name="cash_text">Pagos</string>
+    <string name="payment_receipt">Recibo de Pagos</string>
+    <string name="pagos_pendientes">Pagos Pendientes</string>
+    <string name="pagos_realizados">Pagos Realizados</string>
 
 
 </resources>

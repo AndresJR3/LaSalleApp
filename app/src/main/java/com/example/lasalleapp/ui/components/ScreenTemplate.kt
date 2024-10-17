@@ -59,9 +59,9 @@ fun ScreenTemplate(
             .fillMaxSize()
             .padding(innerPadding)
             .background(MaterialTheme.colorScheme.background)
-            .verticalScroll(
-                rememberScrollState()
-            )
+        //    .verticalScroll(
+        //        rememberScrollState()
+        //    )
     ) {
         //Header
         Box (

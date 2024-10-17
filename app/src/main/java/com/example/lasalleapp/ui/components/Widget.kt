@@ -1,6 +1,7 @@
 package com.example.lasalleapp.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
@@ -23,9 +24,10 @@ import com.example.lasalleapp.ui.theme.GrayLight
 import com.example.lasalleapp.ui.theme.LaSalleAppTheme
 
 @Composable
-fun Widget(icon : ImageVector, text : String){
+fun Widget(icon : ImageVector, text : String, onClick: () -> Unit ){
     Box(
         modifier = Modifier
+            .clickable { onClick() }
             .size(90.dp)
             .clip(RoundedCornerShape(16.dp))
             .background(GrayLight),
@@ -56,7 +58,8 @@ fun WidgetPreview(){
     LaSalleAppTheme { //poner el tema porque me lo pone como un componente.
         Widget(
             icon = Icons.Default.Home,
-            text = ("Inicio")
+            text = ("Inicio"),
+            onClick = {}
         )
     }
 }

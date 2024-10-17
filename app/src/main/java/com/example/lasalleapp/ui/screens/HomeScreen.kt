@@ -143,15 +143,19 @@ fun HomeScreen(innerPadding : PaddingValues, navController : NavController){
                 //widget
                 Widget(
                     icon = Icons.Default.DateRange,
-                    text = "Sin eventos"
+                    text = "Sin eventos",
+                    onClick = {}
                 )
                 Widget(
                     icon = Task,
-                    text = "2 Tareas"
+                    text = "2 Tareas",
+                    onClick = {}
                 )
                 Widget(
                     icon = Cash,
-                    text = stringResource(id = R.string.cash_text)
+                    text = stringResource(id = R.string.cash_text),
+                    onClick = { navController.navigate(Screens.PayScreen.route) }
+
                 )
 
             }
@@ -223,6 +227,9 @@ fun HomeScreen(innerPadding : PaddingValues, navController : NavController){
 fun HomeScreenPreview(){
     val navController = rememberNavController()
     LaSalleAppTheme {
-        HomeScreen(innerPadding = PaddingValues(0.dp), navController = navController)
+        HomeScreen(
+            innerPadding = PaddingValues(0.dp),
+            navController = navController
+        )
     }
 }

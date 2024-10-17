@@ -32,6 +32,7 @@ import com.example.lasalleapp.ui.screens.CalendarScreen
 import com.example.lasalleapp.ui.screens.GradesScreen
 import com.example.lasalleapp.ui.screens.HomeScreen
 import com.example.lasalleapp.ui.screens.NewsDetailScreen
+import com.example.lasalleapp.ui.screens.PayScreen
 import com.example.lasalleapp.ui.screens.SettingsScreen
 import com.example.lasalleapp.ui.theme.LaSalleAppTheme
 import com.example.lasalleapp.ui.utils.Screens
@@ -113,6 +114,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(route = Screens.Settings.route){
                             SettingsScreen(innerPadding = innerPadding)
+                        }
+                        composable(route = Screens.PayScreen.route){
+                            PayScreen(innerPadding = innerPadding)
                         }
                         composable(
                             route = Screens.NewsDetail.route + "/{id}",
