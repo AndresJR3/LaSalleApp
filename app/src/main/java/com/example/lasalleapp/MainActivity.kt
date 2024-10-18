@@ -15,6 +15,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.internal.composableLambda
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -32,8 +33,11 @@ import com.example.lasalleapp.ui.screens.CalendarScreen
 import com.example.lasalleapp.ui.screens.GradesScreen
 import com.example.lasalleapp.ui.screens.HomeScreen
 import com.example.lasalleapp.ui.screens.NewsDetailScreen
+import com.example.lasalleapp.ui.screens.PasswordScreen
 import com.example.lasalleapp.ui.screens.PayScreen
 import com.example.lasalleapp.ui.screens.SettingsScreen
+import com.example.lasalleapp.ui.screens.SubjectDetailScreen
+import com.example.lasalleapp.ui.screens.ThemeScreen
 import com.example.lasalleapp.ui.theme.LaSalleAppTheme
 import com.example.lasalleapp.ui.utils.Screens
 import com.example.lasalleapp.ui.utils.bottomNavBarItems
@@ -110,16 +114,17 @@ class MainActivity : ComponentActivity() {
                             CalendarScreen(innerPadding = innerPadding)
                         }
                         composable(route = Screens.Grades.route){
-                            GradesScreen(innerPadding = innerPadding)
+                            GradesScreen(innerPadding = innerPadding, navController = navController)
                         }
                         composable(route = Screens.Settings.route){
-                            SettingsScreen(innerPadding = innerPadding)
+                            SettingsScreen(innerPadding = innerPadding, navController = navController)
                         }
                         composable(route = Screens.PayScreen.route){
                             PayScreen(innerPadding = innerPadding)
                         }
                         composable(
                             route = Screens.NewsDetail.route + "/{id}",
+
                             arguments = listOf(
                                 navArgument("id"){
                                     type = NavType.IntType
@@ -130,6 +135,26 @@ class MainActivity : ComponentActivity() {
                             val id = it.arguments?.getInt("id", 0) ?: 0
                             NewsDetailScreen(newsId = id, innerPadding = innerPadding) // se agrega en news detial
                         }
+                        // Ruta para SubjectDetailScreen
+                        composable(
+                            route = Screens.GradesDetail.route + "/{subjectId}",
+                            arguments = listOf(
+                                navArgument("subjectId") {
+                                    type = NavType.IntType
+                                    nullable = false
+                                }
+                            )
+                        ) {
+                            val subjectId = it.arguments?.getInt("subjectId", 0) ?: 0
+                            SubjectDetailScreen(subjectId = subjectId, innerPadding = innerPadding)
+                        }
+                        composable(route = Screens.PasswordDetail.route){
+                            PasswordScreen()
+                        }
+                        composable(route= Screens.ThemeDetail.route){
+                            ThemeScreen()
+                        }
+
                     }
 
                 }

@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -75,16 +76,6 @@ fun PayScreen(innerPadding: PaddingValues) {
                 )
             }
 
-            Icon(
-                imageVector = Logout,
-                contentDescription = "logout",
-                modifier = Modifier
-                    .size(45.dp)
-                    .clickable {
-                        Log.i("PayScreen", "Cerrando sesión")
-                    },
-                tint = Color.White
-            )
         }
 
         Box(
@@ -99,14 +90,14 @@ fun PayScreen(innerPadding: PaddingValues) {
                     .align(Alignment.TopCenter)
                     .padding(top = 150.dp),
             )
+
         }
     }, body = {
-        // Usamos LazyColumn para contener tanto encabezados como elementos de la lista
         LazyColumn(
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(16.dp)
         ) {
-            // Sección de Pagos Pendientes
+
             item {
                 Text(
                     text = stringResource(id = R.string.pagos_pendientes),
@@ -119,7 +110,6 @@ fun PayScreen(innerPadding: PaddingValues) {
                 PaymentItem(month = pago.mes, isPaid = false)
             }
 
-            // Sección de Pagos Realizados
             item {
                 Text(
                     text = stringResource(id = R.string.pagos_realizados),
@@ -132,10 +122,9 @@ fun PayScreen(innerPadding: PaddingValues) {
                 PaymentItem(month = pago.mes, isPaid = true)
             }
 
-            // Botón para realizar un nuevo pago
             item {
                 Button(
-                    onClick = { /* Lógica para realizar un pago */ },
+                    onClick = {  },
                     modifier = Modifier.fillMaxWidth().padding(top = 16.dp)
                 ) {
                     Text(text = "Realizar Pago Ahora")
@@ -144,22 +133,29 @@ fun PayScreen(innerPadding: PaddingValues) {
         }
     })
 }
-
 @Composable
 fun PaymentItem(month: String, isPaid: Boolean) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
-            .background(Color.White, shape = RoundedCornerShape(8.dp)) // Fondo blanco
-            .padding(16.dp), // Padding interno
+            .background(
+                color = if (isPaid) Color(0xFFDFF0D8) else Color(0xFFFFEBEE),  // Verde para pagado, rojo claro para pendiente
+                shape = RoundedCornerShape(8.dp)
+            )
+            .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = month,
-            modifier = Modifier.weight(1f),
-            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp)
-        )
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = "Pago de colegiatura: $month",
+                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp)
+            )
+            Text(
+                text = if (isPaid) "Estado: Pagado" else "Estado: Pendiente",
+                style = MaterialTheme.typography.bodySmall.copy(color = if (isPaid) Color.Green else Color.Red)
+            )
+        }
 
         Icon(
             imageVector = if (isPaid) Icons.Default.Check else Icons.Default.Warning,
@@ -168,6 +164,7 @@ fun PaymentItem(month: String, isPaid: Boolean) {
         )
     }
 }
+
 
 @Preview(
     showBackground = true,
